@@ -1,0 +1,29 @@
+query {
+  search(
+    type:REPOSITORY,
+    query: """
+      stars:>10
+      forks:>3
+      size:>2000
+      pushed:>=2018-08-08
+    """,
+    last: 100
+  ) {
+    repos: edges {
+      repo: node {
+        ... on Repository {
+          url
+          name
+          languages(first: 100){
+              edges{
+                size
+                node{
+                  name
+                }
+              }
+            }
+        }
+      }
+    }
+  }
+}

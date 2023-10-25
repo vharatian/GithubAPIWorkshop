@@ -1,0 +1,34 @@
+{
+    repository(owner: "owner-placeholder", name: "name-placeholder") {
+        defaultBranchRef{
+            target {
+                ... on Commit {
+                    history(first:100 until: "2023-01-01T00:00:00" after:"template"){
+                        edges{
+                            cursor
+                            node{
+                                ... on Commit{
+                                    oid
+                                    author{
+                                        name
+                                        email
+                                        user{
+                                            login
+                                        }
+                                    }
+                                    committer{
+                                        name
+                                        email
+                                        user{
+                                            login
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
