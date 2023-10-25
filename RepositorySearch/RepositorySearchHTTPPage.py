@@ -6,7 +6,7 @@ page_size = 100
 
 params = {
     "q": "Java",
-    "per_page": 100,
+    "per_page": 10,
     "sort": "stars",
     "order": "desc"
 }
