@@ -16,6 +16,6 @@ folder_path = "../results/"
 if not os.path.exists(folder_path):
    os.makedirs(folder_path)
 
-with open(folder_path + f"repositories-http.json", 'w') as f:
+with open(f"../results/repositories-http.json", 'w', enconding="utf-8") as f:
     f.write(response.text)
 
