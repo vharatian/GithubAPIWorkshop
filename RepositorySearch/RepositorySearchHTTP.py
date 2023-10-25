@@ -10,6 +10,6 @@ params = {
 
 response = requests.get("https://api.github.com/search/repositories", params = params)
 
-with open(f"../results/repositories-http.json", 'w') as f:
+with open(f"../results/repositories-http.json", 'w', enconding="utf-8") as f:
     f.write(response.text)
 
