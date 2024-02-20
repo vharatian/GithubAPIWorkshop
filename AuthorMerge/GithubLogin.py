@@ -6,6 +6,8 @@ from pydriller import Repository
 
 from config import TOKEN
 
+from RepositorySearch.utils import write_json_file
+
 
 class UserInfo:
     @staticmethod
@@ -26,6 +28,30 @@ class UserInfo:
 
 
 def read_github_repository(github_token, repository_owner, repository_name):
+    """
+        Reads the GitHub repository and returns a dictionary with commit information.
+
+        Parameters
+        ----------
+        github_token : str
+            The GitHub token used for authentication.
+        repository_owner : str
+            The owner of the repository.
+        repository_name : str
+            The name of the repository.
+
+        Returns
+        -------
+        dict
+            A dictionary where the keys are commit OIDs and the values are tuples containing the author and committer
+            as UserInfo objects.
+
+        Raises
+        ------
+        Exception
+            If there is an error in the request or processing the response.
+        """
+
     github_info = {}
     try:
         headers = {
@@ -71,6 +97,19 @@ def read_github_repository(github_token, repository_owner, repository_name):
 
 
 def get_local_info(local_path):
+    """
+        Retrieves commit information from a local repository.
+
+        Parameters
+        ----------
+        local_path : str
+            The path to the local repository.
+
+        Returns
+        -------
+        dict
+            A dictionary where the keys are commit hashes and the values are tuples containing the author and committer.
+        """
     local_repo = Repository(local_path)
     local_info = {}
     for commit in local_repo.traverse_commits():
@@ -140,18 +179,17 @@ def merge_based_on_login(user_data):
     return results
 
 
-localInfo = get_local_info("../repositories/core")
-github_info = read_github_repository(TOKEN, "vuejs", "core")
-user_data = create_users_data(localInfo, github_info)
-merge_result = merge_based_on_login(user_data)
+if __name__ == "__main__":
+    localInfo = get_local_info("../repositories/core")
+    github_info = read_github_repository(TOKEN, "vuejs", "core")
+    user_data = create_users_data(localInfo, github_info)
+    merge_result = merge_based_on_login(user_data)
 
-final_result = {}
-for login in merge_result:
-    if len(merge_result[login]["name"]) > 1 or len(merge_result[login]["email"]) > 1:
-        final_result[login] = {"name": list(merge_result[login]["name"]), "email": list(merge_result[login]["email"])}
+    final_result = {}
+    for login in merge_result:
+        if len(merge_result[login]["name"]) > 1 or len(merge_result[login]["email"]) > 1:
+            final_result[login] = {"name": list(merge_result[login]["name"]), "email": list(merge_result[login]["email"])}
 
+    write_json_file("merge-github.json", final_result)
 
-with open(f"../results/merge-github.json", 'w') as f:
-    f.write(json.dumps(final_result))
-
-print("end")
+    print("end")
