@@ -25,7 +25,7 @@ This is a workshop for students to learn how to use GitHub API and more specific
     pip install -r requirements.txt
 ```
 
-### Configuration
+### Configuration (Required by task 4 and 6)
 Copy the config-template.py file to the config.py file.
 
 ```bash
@@ -35,7 +35,7 @@ Copy the config-template.py file to the config.py file.
 Obtain a valid github token and place it into the config.py file.
 Look at the [GitHub Documentation](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) for more information.
 
-### Evaluation Repository
+### Evaluation Repository (Required by task 6)
 To complete the GithubLogin task you need to clone the VueJS core repository into the `repositories` folder.
 
 ```bash
