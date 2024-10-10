@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 from RepositorySearch.utils import write_json_file
@@ -31,4 +33,5 @@ def get_repositories():
 
 if __name__ == "__main__":
     response = get_repositories()
-    write_json_file("repositories-http.json", response.text)
+    data = json.loads(response.text)
+    write_json_file("repositories-http.json", data)
