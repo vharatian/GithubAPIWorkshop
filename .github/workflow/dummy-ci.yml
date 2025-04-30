@@ -1,0 +1,20 @@
+name: Simple CI pipeline
+
+on: [push]          # fire on every push; adjust as needed
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code             # (optional but common)
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: echo "Build step"
+
+      - name: Test
+        run: echo "Test step"
+
+      - name: Deploy
+        run: echo "Deploy step"
