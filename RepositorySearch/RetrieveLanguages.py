@@ -41,6 +41,8 @@ def get_repository_with_language():
 
         results += [{"name": repo["name"], "lang": lang_res_json}]
 
+    return results
+
 
 if __name__ == "__main__":
     results = get_repository_with_language()
