@@ -1,3 +1,5 @@
+import json
+
 from config import TOKEN
 import requests
 
@@ -37,4 +39,5 @@ def get_repository_with_language():
 
 if __name__ == "__main__":
     response = get_repository_with_language()
-    write_json_file("repositories-graphql-lang.json", response.text)
+    data = json.loads(response.text)
+    write_json_file("repositories-graphql-lang.json", data)

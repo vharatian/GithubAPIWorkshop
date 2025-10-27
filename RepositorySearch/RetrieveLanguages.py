@@ -33,6 +33,7 @@ def get_repository_with_language():
 
     response = requests.get("https://api.github.com/search/repositories", params=params)
     response_json = json.loads(response.text)
+    print(response.text)
 
     results = []
     for repo in response_json["items"]:
