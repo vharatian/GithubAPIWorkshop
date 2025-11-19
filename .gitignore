@@ -187,3 +187,5 @@ fabric.properties
 results
 repositories
 config.py
+
+node_modules/
